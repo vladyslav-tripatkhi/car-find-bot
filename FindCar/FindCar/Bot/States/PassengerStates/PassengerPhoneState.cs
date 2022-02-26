@@ -25,8 +25,7 @@ namespace FindCar.Bot.PassengerStates
 
         private bool VerifyPhoneIsUkrainian(string text)
         {
-            // TODO implement
-            return true;
+            return text.StartsWith("+380");
         }
     }
 }
