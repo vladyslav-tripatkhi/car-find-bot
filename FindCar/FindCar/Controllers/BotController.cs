@@ -20,11 +20,11 @@ namespace FindCar.Controllers
         public void Update() {} // webhook check
 
         
-        [HttpPost("update")]
+/*        [HttpPost("update")]
         public async Task Update(Update update)
         {
-            await _botProcessor.Handle(update);
-        }
+            await _botProcessor.HandleUpdateAsync(update);
+        }*/
 
     }
 }
