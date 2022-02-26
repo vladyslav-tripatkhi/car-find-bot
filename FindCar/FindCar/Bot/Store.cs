@@ -27,21 +27,26 @@ namespace FindCar.Bot
         {
             _db = db;
         }
-        
+
+        public Store()
+        {
+            // [DEBUG] Dummy constructor
+        }
+
         public Task SaveState<T>(long chatId, T state) where T : IBotState
         {
             //var state = _db.GetCollection<JsonWrap>();
-            throw new NotImplementedException();
+            return Task.Delay(1);
         }
 
         public Task<IBotState> GetState(long chatId)
         {
-            throw new NotImplementedException();
+            return Task<IBotState>.FromResult((IBotState)null);
         }
         
         public Task<Passenger[]> GetPassengers(int seats, string from, string to)
         {
-            throw new NotImplementedException();
+            return Task<Passenger[]>.FromResult((Passenger[])null);
         }
     }
 }
