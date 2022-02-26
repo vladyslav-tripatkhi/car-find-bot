@@ -13,8 +13,6 @@ namespace FindCar.Bot
         public TelegramBotClient Client { get; }
         public Store Store { get; }
 
-        public Passenger CurrentPassenger = new Passenger();
-
         public ChatContext(long chatId, TelegramBotClient client, Store store)
         {
             ChatId = chatId;
@@ -22,9 +20,10 @@ namespace FindCar.Bot
             Store = store;
         }
 
-        public async Task SendText(string message)
+        public async Task SendText(string message, bool removeKeyboard = false)
         {
-            await Client.SendTextMessageAsync(ChatId, message);
+            var markup = removeKeyboard ? new ReplyKeyboardRemove() : null;
+            await Client.SendTextMessageAsync(ChatId, message, replyMarkup: markup);
         }
 
         public async Task Send(string message, string[] buttons)
@@ -34,20 +33,13 @@ namespace FindCar.Bot
             await Client.SendTextMessageAsync(ChatId, message, replyMarkup: reply);
         }
 
-        async Task<Message> Send(Message message, string title, InlineKeyboardMarkup? keyboardMarkup)
+        public async Task<Message> Send(Message message, string title, InlineKeyboardMarkup? keyboardMarkup)
         {
             await Client.SendChatActionAsync(message.Chat.Id, ChatAction.Typing);
 
             return await Client.SendTextMessageAsync(chatId: message.Chat.Id,
                                                         text: title,
                                                         replyMarkup: keyboardMarkup);
-        }
-
-        async Task<Message> RemoveKeyboard(Message message)
-        {
-            return await Client.SendTextMessageAsync(chatId: message.Chat.Id,
-                                                        text: "Removing keyboard",
-                                                        replyMarkup: new ReplyKeyboardRemove());
         }
 
         async Task<Message> RequestContact(Message message)
