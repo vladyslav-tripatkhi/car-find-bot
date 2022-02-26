@@ -31,15 +31,17 @@ namespace FindCar.Bot
         public Task SaveState<T>(long chatId, T state) where T : IBotState
         {
             //var state = _db.GetCollection<JsonWrap>();
+            throw new NotImplementedException();
         }
 
         public Task<IBotState> GetState(long chatId)
         {
-            
+            throw new NotImplementedException();
         }
         
         public Task<Passenger[]> GetPassengers(int seats, string from, string to)
         {
+            throw new NotImplementedException();
         }
     }
 }
