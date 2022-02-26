@@ -34,7 +34,7 @@ namespace FindCar.Bot
             await Client.SendTextMessageAsync(ChatId, message, replyMarkup: reply);
         }
 
-        async Task<Message> Send(Message message, string title, InlineKeyboardMarkup? keyboardMarkup)
+        public async Task<Message> Send(Message message, string title, InlineKeyboardMarkup? keyboardMarkup)
         {
             await Client.SendChatActionAsync(message.Chat.Id, ChatAction.Typing);
 
@@ -43,14 +43,14 @@ namespace FindCar.Bot
                                                         replyMarkup: keyboardMarkup);
         }
 
-        async Task<Message> RemoveKeyboard(Message message)
+        public async Task<Message> RemoveKeyboard(Message message)
         {
             return await Client.SendTextMessageAsync(chatId: message.Chat.Id,
                                                         text: "Removing keyboard",
                                                         replyMarkup: new ReplyKeyboardRemove());
         }
 
-        async Task<Message> RequestContact(Message message)
+        public async Task<Message> RequestContact(Message message)
         {
             ReplyKeyboardMarkup RequestReplyKeyboard = new(
                 new[]
@@ -63,7 +63,7 @@ namespace FindCar.Bot
                                                         replyMarkup: RequestReplyKeyboard);
         }
 
-        async Task<Message> Usage(Message message)
+        public async Task<Message> Usage(Message message)
         {
             const string usage = "Wrong command!";
 

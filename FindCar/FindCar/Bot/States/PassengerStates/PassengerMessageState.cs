@@ -7,12 +7,13 @@ namespace FindCar.Bot.PassengerStates
     {
         public async Task OnInit(ChatContext ctx)
         {
-            
+            await ctx.SendText("Додайте повідомлення для водія");
         }
 
         public async Task<IBotState> HandleMessage(ChatContext ctx, Message message)
         {
-            throw new System.NotImplementedException();
+            ctx.CurrentPassenger.Message = message.Text;
+            return new PassengerPhoneState();
         }
     }
 }
