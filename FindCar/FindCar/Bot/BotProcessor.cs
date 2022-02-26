@@ -5,11 +5,7 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
 using Telegram.Bot.Exceptions;
-using Telegram.Bot.Types.InlineQueryResults;
-using Telegram.Bot.Types.InputFiles;
-using Telegram.Bot.Types.ReplyMarkups;
 using System.Threading;
-using System.IO;
 
 namespace FindCar.Bot
 {

@@ -36,9 +36,11 @@ namespace FindCar
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Bot = new TelegramBotClient("5135044598:AAF36QUExIDe1Hbp86bvS3PS7TKyWL5pmK0");
+
             services.AddControllers();
             // TODO: use configuration to store telegram token
-            services.AddSingleton(new TelegramBotClient("PLACE TOKEN GIVEN BY BOTFATHER here"));
+            services.AddSingleton(Bot);
             services.AddSingleton<IMongoDatabase>(new MongoDatabaseMock());
             services.AddSingleton<Store>();
             services.AddSingleton<BotProcessor>();
@@ -55,12 +57,8 @@ namespace FindCar
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FindCar v1"));
             }
 
-            Bot = new TelegramBotClient("5135044598:AAF36QUExIDe1Hbp86bvS3PS7TKyWL5pmK0");
 
             BotProcessor = new BotProcessor(Bot, new Store());
-
-            User me = await Bot.GetMeAsync();
-            Console.Title = me.Username ?? "My awesome Bot";
 
             using var cts = new CancellationTokenSource();
 
@@ -71,7 +69,6 @@ namespace FindCar
                                receiverOptions,
                                cts.Token);
 
-            Console.WriteLine($"Start listening for @{me.Username}");
             Console.ReadLine();
 
             // Send cancellation request to stop bot
