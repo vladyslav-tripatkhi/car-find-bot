@@ -1,0 +1,32 @@
+name: FindCar bot
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v2
+
+      - name: Login to docker registry
+        uses: docker/login-action@v1.13.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v2.9.0
+        with:
+          context: FindCar
+          push: true
+          tags: ghcr.io/${{ github.actor }}/${{ github.repository }}/find-car:${{ github.sha }}
+
+      - name: Deploy
+        uses: satak/webrequest-action@v1.2.4
+        with:
+          url: "PLACEHOLDER_URL"
+          method: POST
