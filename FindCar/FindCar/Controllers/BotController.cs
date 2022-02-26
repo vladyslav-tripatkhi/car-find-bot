@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
+using FindCar.Bot;
 using Microsoft.AspNetCore.Mvc;
-using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace FindCar.Controllers
@@ -26,24 +26,5 @@ namespace FindCar.Controllers
             await _botProcessor.Handle(update);
         }
 
-    }
-    
-
-    public class BotProcessor
-    {
-        public BotProcessor(TelegramBotClient client, StateStore stateStore) 
-        {
-            
-        }
-        
-        public async Task Handle(Update update)
-        {
-            
-        }
-    }
-
-    public class StateStore
-    {
-        
     }
 }
