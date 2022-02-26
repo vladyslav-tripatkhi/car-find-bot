@@ -13,6 +13,8 @@ namespace FindCar.Bot
         public TelegramBotClient Client { get; }
         public Store Store { get; }
 
+        public Passenger CurrentPassenger = new Passenger();
+
         public ChatContext(long chatId, TelegramBotClient client, Store store)
         {
             ChatId = chatId;

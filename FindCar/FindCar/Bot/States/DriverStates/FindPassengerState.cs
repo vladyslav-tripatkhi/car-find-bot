@@ -21,8 +21,8 @@ namespace FindCar.Bot
         {
             var passengers = await ctx.Store.GetPassengers(SeatCount, From, To);
 
-            var messages = passengers.Select(s => $"Звiдки: {s.From}\n" +
-                                                  $"Куди: {s.To}\n" +
+            var messages = passengers.Select(s => $"Звiдки: {s.FromCity}\n" +
+                                                  $"Куди: {s.ToRegion}\n" +
                                                   $"Cкiльки осiб: {s.SeatCount}\n" +
                                                   $"Повiдомлення: {s.Message}\n" +
                                                   $"Telegram: {s.Telegram}");

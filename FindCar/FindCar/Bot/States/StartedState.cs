@@ -24,7 +24,7 @@ namespace FindCar.Bot
             {
                 case HaveCar: return new HaveCarState();
                 
-                case FindCar: return new FindCarState();
+                case FindCar: return new PassengerFromCityState();
                     
                 default:
                     await OnInit(ctx);

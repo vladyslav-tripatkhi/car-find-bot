@@ -10,8 +10,6 @@ namespace FindCar.Bot
         public string Payload { get; set; }
     }
     
-    public record Passenger(string ChatId, string From, string To, string SeatCount, string Message, string Phone, string Telegram);
-    
     public class Store
     {
         

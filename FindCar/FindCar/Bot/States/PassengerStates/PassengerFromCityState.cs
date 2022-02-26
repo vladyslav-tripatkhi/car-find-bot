@@ -3,16 +3,17 @@ using Telegram.Bot.Types;
 
 namespace FindCar.Bot.PassengerStates
 {
-    public class FindCarState : IBotState
+    public class PassengerFromCityState : IBotState
     {
         public async Task OnInit(ChatContext ctx)
         {
-            await ctx.SendText("В якому ви місті?");
+            await ctx.Send("В якому ви місті?", Constants.FromCities);
         }
 
         public async Task<IBotState> HandleMessage(ChatContext ctx, Message message)
         {
-            throw new System.NotImplementedException();
+            ctx.CurrentPassenger.FromCity = message.Text;
+            return new PassengerToRegionState();
         }
     }
 }
