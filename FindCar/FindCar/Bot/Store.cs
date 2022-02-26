@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using FindCar.Bot.PassengerStates;
 using MongoDB.Driver;
 
 namespace FindCar.Bot
@@ -12,11 +13,11 @@ namespace FindCar.Bot
     
     public class Store
     {
-        
+        public Passenger CurrentPassenger = new Passenger();
         // предлагаю реализовать стор через сериализацию с поддекржкой полиморфизма или заюзать 
         // сериализацию монги, она тоже умеет в сериализацию классов с наследованием
         // важно чтоб при десериализации по IBotState мы получали инстанс конкретного стейта
-        
+
         // вариант руками все заворачивать в JsonWrap
         // и по TypeName десериализировать в конкретный инстанс
         private readonly IMongoDatabase _db;
@@ -39,6 +40,26 @@ namespace FindCar.Bot
 
         public Task<IBotState> GetState(long chatId)
         {
+            if (CurrentPassenger.FromCity == null)
+            {
+                return Task<IBotState>.FromResult((IBotState)new PassengerFromCityState());
+            }
+            if (CurrentPassenger.ToRegion == null)
+            {
+                return Task<IBotState>.FromResult((IBotState)new PassengerToRegionState());
+            }
+            if (CurrentPassenger.SeatCount == 0)
+            {
+                return Task<IBotState>.FromResult((IBotState)new PassengerSeatCountState());
+            }
+            if (CurrentPassenger.Message == null)
+            {
+                return Task<IBotState>.FromResult((IBotState)new PassengerMessageState());
+            }
+            if (CurrentPassenger.Phone == null)
+            {
+                return Task<IBotState>.FromResult((IBotState)new PassengerPhoneState());
+            }
             return Task<IBotState>.FromResult((IBotState)null);
         }
         
