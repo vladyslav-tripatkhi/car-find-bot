@@ -13,8 +13,6 @@ namespace FindCar.Bot
         public TelegramBotClient Client { get; }
         public Store Store { get; }
 
-        public Passenger CurrentPassenger = new Passenger();
-
         public ChatContext(long chatId, TelegramBotClient client, Store store)
         {
             ChatId = chatId;
@@ -22,9 +20,10 @@ namespace FindCar.Bot
             Store = store;
         }
 
-        public async Task SendText(string message)
+        public async Task SendText(string message, bool removeKeyboard = false)
         {
-            await Client.SendTextMessageAsync(ChatId, message);
+            var markup = removeKeyboard ? new ReplyKeyboardRemove() : null;
+            await Client.SendTextMessageAsync(ChatId, message, replyMarkup: markup);
         }
 
         public async Task Send(string message, string[] buttons)

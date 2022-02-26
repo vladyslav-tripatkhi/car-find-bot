@@ -12,7 +12,7 @@ namespace FindCar.Bot.PassengerStates
 
         public async Task<IBotState> HandleMessage(ChatContext ctx, Message message)
         {
-            ctx.CurrentPassenger.Message = message.Text;
+            ctx.Store.CurrentPassenger.Message = message.Text;
             return new PassengerPhoneState();
         }
     }
