@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using MongoDB.Driver;
 
@@ -29,21 +30,18 @@ namespace FindCar.Bot
         
         public Task SaveState<T>(long chatId, T state) where T : IBotState
         {
-            // TODO implement
             //var state = _db.GetCollection<JsonWrap>();
-            return null;
+            throw new NotImplementedException();
         }
 
         public Task<IBotState> GetState(long chatId)
         {
-            // TODO implement
-            return null;
+            throw new NotImplementedException();
         }
         
         public Task<Passenger[]> GetPassengers(int seats, string from, string to)
         {
-            // TODO implement
-            return null;
+            throw new NotImplementedException();
         }
     }
 }

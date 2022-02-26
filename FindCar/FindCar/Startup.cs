@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FindCar.Bot;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MongoDB.Driver;
+using Telegram.Bot;
 
 namespace FindCar
 {
@@ -27,6 +30,11 @@ namespace FindCar
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            // TODO: use configuration to store telegram token
+            services.AddSingleton(new TelegramBotClient("PLACE TOKEN GIVEN BY BOTFATHER here"));
+            services.AddSingleton<IMongoDatabase>(new MongoDatabaseMock());
+            services.AddSingleton<Store>();
+            services.AddSingleton<BotProcessor>();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "FindCar", Version = "v1" }); });
         }
 
